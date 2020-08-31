@@ -1,13 +1,17 @@
-import uploadFeature from '@admin-bro/upload'
-import { User } from './user.entity'
+import passwordsFeature from '@admin-bro/passwords'
 import { ResourceWithOptions } from 'admin-bro'
+import { User } from './user.entity'
 
 const UserResource: ResourceWithOptions = {
   resource: User,
   options: {
-    listProperties: ['id', 'avatar', 'email', 'test'],
+    properties: {
+
+    },
   },
-  features: [],
+  features: [passwordsFeature({
+    properties: { encryptedPassword: 'hashedPassword' },
+  })],
 }
 
 export default UserResource

@@ -1,5 +1,5 @@
 name: CI/CD
-on: push
+on: [push, pull_request]
 jobs:
   test:
     name: test
@@ -32,6 +32,7 @@ jobs:
       - name: Build
         run: yarn build
       - name: Release
+        if: github.event_name == 'push'
         env:
           SLACK_WEBHOOK: ${{ secrets.SLACK_WEBHOOK }}
           NPM_TOKEN: ${{ secrets.NPM_TOKEN }}
