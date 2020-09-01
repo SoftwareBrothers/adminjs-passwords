@@ -1,8 +1,8 @@
 import React, { useState, useEffect } from 'react'
-import { EditPropertyProps, BasePropertyComponent } from 'admin-bro'
+import { BasePropertyComponent } from 'admin-bro'
 import { Box, Button, Text } from '@admin-bro/design-system'
 
-const PasswordEdit: React.FC<EditPropertyProps> = (props) => {
+const PasswordEdit = (props) => {
   const { onChange, property, record } = props
 
   const [showPassword, togglePassword] = useState(false)

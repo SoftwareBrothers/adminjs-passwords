@@ -42,7 +42,7 @@ module.exports = {
     '@typescript-eslint/no-explicit-any': 'off',
   },
   overrides: [{
-    files: ['*.tsx'],
+    files: ['*.tsx', '*.jsx'],
     rules: {
       'react/prop-types': 'off',
       'react/jsx-props-no-spreading': 'off',

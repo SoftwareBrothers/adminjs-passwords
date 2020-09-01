@@ -47,7 +47,7 @@ export type Custom = {
   [T in keyof NonNullable<PasswordsOptions['properties']>]: NonNullable<T>
 }
 
-const editComponent = AdminBro.bundle('../src/components/edit')
+const editComponent = AdminBro.bundle('../components/edit')
 
 const passwordsFeature = (options?: PasswordsOptions): FeatureType => {
   const passwordProperty = options?.properties?.password || 'password'
