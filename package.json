@@ -1,6 +1,6 @@
 {
   "name": "@admin-bro/passwords",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "main": "index.js",
   "types": "types/index.d.ts",
   "private": false,
