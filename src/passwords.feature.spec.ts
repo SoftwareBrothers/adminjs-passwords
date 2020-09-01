@@ -1,5 +1,6 @@
 import { expect } from 'chai'
 import { ActionRequest, Before, ActionContext, After, ActionResponse } from 'admin-bro'
+import sinon, { SinonStub } from 'sinon'
 import passwordsFeature, { PasswordsOptions } from './passwords.feature'
 
 describe('passwordsFeature', () => {
@@ -7,12 +8,14 @@ describe('passwordsFeature', () => {
   let request: ActionRequest
   let context: ActionContext
   let response: ActionResponse
+  let hash: SinonStub<[string], Promise<string>>
 
   beforeEach(() => {
     properties = {
       password: 'visiblePassword',
       encryptedPassword: 'storedPassword',
     }
+    hash = sinon.stub<[string], Promise<string>>()
     request = {
       method: 'post',
       payload: {},
@@ -28,8 +31,18 @@ describe('passwordsFeature', () => {
     context = {} as ActionContext
   })
 
+  afterEach(() => {
+    sinon.restore()
+  })
+
   it('returns password feature', async () => {
-    expect(typeof passwordsFeature()).to.have.eq('function')
+    expect(typeof passwordsFeature({ hash })).to.have.eq('function')
+  })
+
+  it('throws an error when hashing function is not defined', () => {
+    expect(() => {
+      passwordsFeature()
+    }).to.throw()
   })
 
   describe('edit#before hook - #encryptPassword', () => {
@@ -41,7 +54,7 @@ describe('passwordsFeature', () => {
     }
 
     beforeEach(() => {
-      encryptPassword = getBeforeHook({ properties })
+      encryptPassword = getBeforeHook({ properties, hash })
     })
 
     it('does nothing when method is get', async () => {
@@ -64,6 +77,8 @@ describe('passwordsFeature', () => {
 
     it('encrypts the password when it is given and removes the original one', async () => {
       const oldEncrypted = 'someExistingPassword'
+      const newEncrypted = 'someNewPassword'
+      hash.resolves(newEncrypted)
       request.payload = {
         [properties.encryptedPassword as string]: oldEncrypted,
         [properties.password as string]: 'some-new-password',
@@ -72,12 +87,12 @@ describe('passwordsFeature', () => {
       const ret = await encryptPassword(request, context)
 
       expect(ret.payload?.[properties.encryptedPassword]).not.to.eq(oldEncrypted)
-      expect(ret.payload?.[properties.encryptedPassword]).not.to.be.undefined
+      expect(ret.payload?.[properties.encryptedPassword]).to.eq(newEncrypted)
       expect(ret.payload?.[properties.password as string]).to.be.undefined
     })
   })
 
-  describe.only('edit#after hook #movePasswordErrors', () => {
+  describe('edit#after hook #movePasswordErrors', () => {
     let movePasswordErrors: After<ActionResponse>
 
     const getAfterHook = (options: PasswordsOptions): After<ActionResponse> => {
@@ -86,7 +101,7 @@ describe('passwordsFeature', () => {
     }
 
     beforeEach(() => {
-      movePasswordErrors = getAfterHook({ properties })
+      movePasswordErrors = getAfterHook({ properties, hash })
     })
 
     it('does nothing when payload doesn\'t have errors', async () => {

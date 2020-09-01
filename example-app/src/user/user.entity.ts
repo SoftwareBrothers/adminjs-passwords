@@ -25,7 +25,7 @@ export class User extends BaseEntity {
   @Column({ nullable: true })
   public avatar: string;
 
-  @Column({ nullable: true })
+  @Column({ nullable: false })
   public hashedPassword: string;
 
   @CreateDateColumn()

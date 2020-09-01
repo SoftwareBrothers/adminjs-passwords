@@ -1,5 +1,6 @@
-import AdminBro, { buildFeature, Before, ActionResponse, After } from 'admin-bro'
-import * as argon2 from 'argon2'
+import AdminBro, { buildFeature, Before, ActionResponse, After, FeatureType } from 'admin-bro'
+
+export type HashingFunction = (hash: string) => (Promise<string> | string)
 
 export type PasswordsOptions = {
   /**
@@ -15,7 +16,13 @@ export type PasswordsOptions = {
      * Property where encrypted password will be stored. Default to `encryptedPassword`
      */
     encryptedPassword: string,
-  }
+  },
+  /**
+   * Function used to hash the password. You can pass function from the external library
+   * Example using [Argon2](https://www.npmjs.com/package/argon2).: `hash: argon2.hash`
+   *
+   */
+  hash: HashingFunction
 }
 
 export type Custom = {
@@ -24,9 +31,14 @@ export type Custom = {
 
 const editComponent = AdminBro.bundle('../src/components/edit')
 
-const passwordsFeature = (options?: PasswordsOptions) => {
+const passwordsFeature = (options?: PasswordsOptions): FeatureType => {
   const passwordProperty = options?.properties?.password || 'password'
   const encryptedPasswordProperty = options?.properties?.encryptedPassword || 'encryptedPassword'
+  const { hash } = options || {}
+
+  if (!hash) {
+    throw new Error('You have to pass "hash" option in "PasswordOptions" of "passwordsFeature"')
+  }
 
   const encryptPassword: Before = async (request) => {
     const { method } = request
@@ -37,7 +49,7 @@ const passwordsFeature = (options?: PasswordsOptions) => {
         ...request,
         payload: {
           ...rest,
-          [encryptedPasswordProperty]: await argon2.hash(newPassword),
+          [encryptedPasswordProperty]: await hash(newPassword),
         },
       }
     }
