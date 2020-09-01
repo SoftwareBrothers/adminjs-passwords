@@ -11,23 +11,28 @@
  * yarn add @admin-bro/passwords
  * ```
  *
- * Additionally you will have to install password hashing library.
- * In the example you can use argon2:
+ * And install password hashing library if you don't have it yet.
+ * I suggest using [argon2](https://www.npmjs.com/package/argon2) or
+ * [Bcrypt](https://www.npmjs.com/package/bcrypt)..
  *
  * ```
  * yarn add argon2
  * ```
  *
+ * You can also implement your own hashing function.
+ *
  * ## Usage
  *
- * As any feature you have to pass it to the resource in {@link AdminBroOptions#resources}.
+ * As any feature, you have to pass it to the resource in {@link AdminBroOptions#resources}.
  *
- * In the example below we use argon2 as a hashing function.
- * We will also use `encrypted` property from the User where we will store the
+ * In the example below we will use `argon2` as a hashing function.
+ * We will also use `encrypted` property from the `User` model, where we will store the
  * hashed password.
  *
- * Furthermore, we will hide the encrypted field in the UI. We will do this in the
- * regular {@link ResourceOptions}.
+ * Furthermore, we will hide the encrypted field in the UI. We will do this by the help of the
+ * standard {@link PropertyOptions#isVisible}
+ *
+ * Feature creates virtual `password` property. You can change that in {@link PasswordsOptions}.
  *
  * ```
  * const AdminBro = require('admin-bro')
@@ -44,8 +49,10 @@
  *       properties: { encrypted: { isVisible: false } },
  *     },
  *     features: [passwordFeature({
+ *       // PasswordsOptions
  *       properties: {
- *         encryptedPassword: 'encrypted' // to this db field feature will safe password
+ *         // to this field will save the hashed password
+ *         encryptedPassword: 'encrypted'
  *       },
  *       hash: argon2.hash,
  *     })]
@@ -58,6 +65,7 @@
  *
  * ## Options
  *
+ * For the lits of available options take see at {@link PasswordsOptions}.
  */
 
 import passwordsFeature from './passwords.feature'

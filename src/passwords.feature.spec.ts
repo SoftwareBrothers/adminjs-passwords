@@ -86,8 +86,8 @@ describe('passwordsFeature', () => {
 
       const ret = await encryptPassword(request, context)
 
-      expect(ret.payload?.[properties.encryptedPassword]).not.to.eq(oldEncrypted)
-      expect(ret.payload?.[properties.encryptedPassword]).to.eq(newEncrypted)
+      expect(ret.payload?.[properties.encryptedPassword as string]).not.to.eq(oldEncrypted)
+      expect(ret.payload?.[properties.encryptedPassword as string]).to.eq(newEncrypted)
       expect(ret.payload?.[properties.password as string]).to.be.undefined
     })
   })
@@ -113,7 +113,7 @@ describe('passwordsFeature', () => {
     it('moves errors from encryptedPassword to password', async () => {
       const errorMessage = 'password is too short'
       response.record.errors = {
-        [properties.encryptedPassword]: errorMessage,
+        [properties.encryptedPassword as string]: errorMessage,
       }
 
       const ret = await movePasswordErrors(response, request, context)
