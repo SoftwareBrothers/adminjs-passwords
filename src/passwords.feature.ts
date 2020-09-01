@@ -1,7 +1,25 @@
 import AdminBro, { buildFeature, Before, ActionResponse, After, FeatureType } from 'admin-bro'
 
-export type HashingFunction = (hash: string) => (Promise<string> | string)
+/**
+ * Hashing function used to convert the password
+ *
+ * @alias HashingFunction
+ * @memberof module:@admin-bro/passwords
+ * @returns {Promise<string> | string}
+ */
+export type HashingFunction = (
+  /**
+   * Password which should be hashed
+   */
+  password: string
+) => (Promise<string> | string)
 
+/**
+ * Options passed to {@link module:@admin-bro/passwords PasswordsFeature}
+ *
+ * @alias PasswordsOptions
+ * @memberof module:@admin-bro/passwords
+ */
 export type PasswordsOptions = {
   /**
    * Names of the properties used by the feature
@@ -15,7 +33,7 @@ export type PasswordsOptions = {
     /**
      * Property where encrypted password will be stored. Default to `encryptedPassword`
      */
-    encryptedPassword: string,
+    encryptedPassword?: string,
   },
   /**
    * Function used to hash the password. You can pass function from the external library
