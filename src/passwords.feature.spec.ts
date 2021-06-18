@@ -1,5 +1,5 @@
 import { expect } from 'chai'
-import { ActionRequest, Before, ActionContext, After, ActionResponse } from 'admin-bro'
+import { ActionRequest, Before, ActionContext, After, ActionResponse } from 'adminjs'
 import sinon, { SinonStub } from 'sinon'
 import passwordsFeature, { PasswordsOptions } from './passwords.feature'
 

@@ -1,14 +1,14 @@
 /**
- * @module @admin-bro/passwords
+ * @module @adminjs/passwords
  * @classdesc
- * AdminBro feature allowing you to hash passwords in a a given resource.
+ * AdminJS feature allowing you to hash passwords in a a given resource.
  *
  * ## Installation
  *
  * To install the passwords feature run:
  *
  * ```bash
- * yarn add @admin-bro/passwords
+ * yarn add @adminjs/passwords
  * ```
  *
  * And install password hashing library if you don't have it yet.
@@ -23,7 +23,7 @@
  *
  * ## Usage
  *
- * As any feature, you have to pass it to the resource in {@link AdminBroOptions#resources}.
+ * As any feature, you have to pass it to the resource in {@link AdminJSOptions#resources}.
  *
  * In the example below we will use `argon2` as a hashing function.
  * We will also use `encrypted` property from the `User` model, where we will store the
@@ -35,8 +35,8 @@
  * Feature creates virtual `password` property. You can change that in {@link PasswordsOptions}.
  *
  * ```
- * const AdminBro = require('admin-bro')
- * const passwordFeature = require('@admin-bro/passwords')
+ * const AdminJS = require('adminjs')
+ * const passwordFeature = require('@adminjs/passwords')
  * const argon2 = require('argon2')
  *
  * // part where you load adapter and models
@@ -59,7 +59,7 @@
  *   }]
  * }
  *
- * const adminBro = new AdminBro(options)
+ * const adminJs = new AdminJS(options)
  * // and the rest of your app
  * ```
  *
