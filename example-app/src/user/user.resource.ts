@@ -1,5 +1,5 @@
-import passwordsFeature from '@admin-bro/passwords'
-import { ResourceWithOptions } from 'admin-bro'
+import passwordsFeature from '@adminjs/passwords'
+import { ResourceWithOptions } from 'adminjs'
 import argon2 from 'argon2'
 import { User } from './user.entity'
 

@@ -1,10 +1,10 @@
-import AdminBro, { buildFeature, Before, ActionResponse, After, FeatureType } from 'admin-bro'
+import AdminJS, { buildFeature, Before, ActionResponse, After, FeatureType } from 'adminjs'
 
 /**
  * Hashing function used to convert the password
  *
  * @alias HashingFunction
- * @memberof module:@admin-bro/passwords
+ * @memberof module:@adminjs/passwords
  * @returns {Promise<string> | string}
  */
 export type HashingFunction = (
@@ -15,10 +15,10 @@ export type HashingFunction = (
 ) => (Promise<string> | string)
 
 /**
- * Options passed to {@link module:@admin-bro/passwords PasswordsFeature}
+ * Options passed to {@link module:@adminjs/passwords PasswordsFeature}
  *
  * @alias PasswordsOptions
- * @memberof module:@admin-bro/passwords
+ * @memberof module:@adminjs/passwords
  */
 export type PasswordsOptions = {
   /**
@@ -47,7 +47,7 @@ export type Custom = {
   [T in keyof NonNullable<PasswordsOptions['properties']>]: NonNullable<T>
 }
 
-const editComponent = AdminBro.bundle('../components/edit')
+const editComponent = AdminJS.bundle('../components/edit')
 
 const passwordsFeature = (options?: PasswordsOptions): FeatureType => {
   const passwordProperty = options?.properties?.password || 'password'

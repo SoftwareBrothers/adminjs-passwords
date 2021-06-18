@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
-import { EditPropertyProps, BasePropertyComponent } from 'admin-bro'
-import { Box, Button, Text } from '@admin-bro/design-system'
+import { EditPropertyProps, BasePropertyComponent } from 'adminjs'
+import { Box, Button, Text } from '@adminjs/design-system'
 
 const PasswordEdit: React.FC<EditPropertyProps> = (props) => {
   const { onChange, property, record } = props
