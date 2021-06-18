@@ -6,13 +6,13 @@ This is an official [AdminJS](https://github.com/SoftwareBrothers/adminjs) featu
 
 AdminJS is an automatic admin interface which can be plugged into your application. You, as a developer, provide database models (like posts, comments, stores, products or whatever else your application uses), and AdminJS generates UI which allows you (or other trusted users) to manage content.
 
-Check out the example application with mongo and postgres models here: https://admin-bro-example-app-staging.herokuapp.com/admin
+Check out the example application with mongo and postgres models here: https://demo.adminjs.co
 
 Or visit [AdminJS](https://github.com/SoftwareBrothers/adminjs) github page.
 
 ## Usage
 
-To see example usage see the [example-app](https://github.com/SoftwareBrothers/adminjs-upload/tree/master/example-app) or visit the [@adminjs/upload section under AdminJS project page](https://adminjs.co/module-@adminjs_upload.html)
+To see example usage see the [example-app](https://github.com/SoftwareBrothers/adminjs-passwords/tree/master/example-app) or visit the [@adminjs/upload section under AdminJS project page](https://adminjs.co/module-@adminjs_upload.html)
 
 ## License
 
