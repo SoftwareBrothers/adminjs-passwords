@@ -1,5 +1,7 @@
 /**
  * @module @adminjs/passwords
+ * @subcategory Features
+ * @section modules
  * @classdesc
  * AdminJS feature allowing you to hash passwords in a a given resource.
  *
