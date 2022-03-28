@@ -18,9 +18,7 @@
       "commit-msg": "commitlint -E HUSKY_GIT_PARAMS"
     }
   },
-  "dependencies": {
-    "aws-sdk": "^2.728.0"
-  },
+  "dependencies": {},
   "peerDependencies": {
     "adminjs": ">=5.0.0"
   },
