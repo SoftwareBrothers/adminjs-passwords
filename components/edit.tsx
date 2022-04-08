@@ -1,9 +1,10 @@
 import React, { useState, useEffect } from 'react'
-import { EditPropertyProps, BasePropertyComponent } from 'adminjs'
+import { EditPropertyProps, BasePropertyComponent, useTranslation } from 'adminjs'
 import { Box, Button, Text } from '@adminjs/design-system'
 
 const PasswordEdit: React.FC<EditPropertyProps> = (props) => {
-  const { onChange, property, record } = props
+  const { onChange, property, record, resource } = props
+  const { translateButton: tb } = useTranslation()
 
   const [showPassword, togglePassword] = useState(false)
 
@@ -24,7 +25,7 @@ const PasswordEdit: React.FC<EditPropertyProps> = (props) => {
       <Box mb="xl">
         <Text textAlign="center">
           <Button onClick={() => togglePassword(!showPassword)} type="button">
-            {showPassword ? 'Cancel' : 'Change password'}
+            {showPassword ? tb('cancel', resource.id) : tb('changePassword', resource.id)}
           </Button>
         </Text>
       </Box>
