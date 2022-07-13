@@ -20,7 +20,7 @@
   },
   "dependencies": {},
   "peerDependencies": {
-    "adminjs": ">=5.0.0"
+    "adminjs": ">=6.0.0"
   },
   "devDependencies": {
     "@commitlint/cli": "^8.3.5",
@@ -32,7 +32,7 @@
     "@types/sinon-chai": "^3.2.4",
     "@typescript-eslint/eslint-plugin": "^3.7.0",
     "@typescript-eslint/parser": "^3.7.0",
-    "adminjs": "^5.0.0",
+    "adminjs": "^6.0.0",
     "argon2": "^0.27.0",
     "chai": "^4.2.0",
     "eslint": "^7.5.0",
