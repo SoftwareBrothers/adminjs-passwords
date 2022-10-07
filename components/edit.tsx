@@ -1,6 +1,6 @@
-import React, { useState, useEffect } from 'react'
-import { EditPropertyProps, BasePropertyComponent, useTranslation } from 'adminjs'
 import { Box, Button, Text } from '@adminjs/design-system'
+import { BasePropertyComponent, EditPropertyProps, useTranslation } from 'adminjs'
+import React, { useEffect, useState } from 'react'
 
 const PasswordEdit: React.FC<EditPropertyProps> = (props) => {
   const { onChange, property, record, resource } = props
@@ -12,7 +12,7 @@ const PasswordEdit: React.FC<EditPropertyProps> = (props) => {
     if (!showPassword) {
       onChange(property.name, '')
     }
-  }, [onChange, property, showPassword])
+  }, [onChange, showPassword])
 
   // For new records always show the property
   if (!record.id) {
