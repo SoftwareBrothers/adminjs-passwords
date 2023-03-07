@@ -1,4 +1,4 @@
-import AdminJS, { buildFeature, Before, ActionResponse, After, FeatureType } from 'adminjs'
+import AdminJS, { ActionResponse, After, Before, buildFeature, FeatureType } from 'adminjs'
 
 /**
  * Hashing function used to convert the password
@@ -47,7 +47,7 @@ export type Custom = {
   [T in keyof NonNullable<PasswordsOptions['properties']>]: NonNullable<T>
 }
 
-const editComponent = AdminJS.bundle('../components/edit')
+const editComponent = AdminJS.bundle('../components/edit.js')
 
 const passwordsFeature = (options?: PasswordsOptions): FeatureType => {
   const passwordProperty = options?.properties?.password || 'password'

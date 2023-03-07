@@ -1,8 +1,13 @@
 {
   "name": "@adminjs/passwords",
   "version": "3.0.1",
-  "main": "index.js",
-  "types": "types/index.d.ts",
+  "type": "module",
+  "exports": {
+    ".": {
+      "import": "./build/index.js",
+      "types": "./types/index.d.ts"
+    }
+  },
   "private": false,
   "repository": "git@github.com:SoftwareBrothers/adminjs-passwords.git",
   "license": "MIT",
@@ -48,6 +53,6 @@
     "sinon": "^9.0.3",
     "sinon-chai": "^3.5.0",
     "ts-node": "^9.0.0",
-    "typescript": "^3.9.7"
+    "typescript": "^4.9.5"
   }
 }

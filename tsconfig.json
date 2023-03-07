@@ -12,12 +12,9 @@
     "strictFunctionTypes": true,
     "strictBindCallApply": true,
     "noImplicitThis": true,
-    "moduleResolution": "node",
-    "module": "commonjs",
+    "moduleResolution": "nodenext",
+    "module": "nodenext",
     "baseUrl": "."
   },
-  "include": [
-    "./src/**/*",
-    "./spec/**/*"
-  ],
+  "include": ["./src/**/*", "./spec/**/*"]
 }

@@ -1,7 +1,7 @@
+import { ActionContext, ActionRequest, ActionResponse, After, Before } from 'adminjs'
 import { expect } from 'chai'
-import { ActionRequest, Before, ActionContext, After, ActionResponse } from 'adminjs'
 import sinon, { SinonStub } from 'sinon'
-import passwordsFeature, { PasswordsOptions } from './passwords.feature'
+import passwordsFeature, { PasswordsOptions } from './passwords.feature.js'
 
 describe('passwordsFeature', () => {
   let properties: NonNullable<PasswordsOptions['properties']>
