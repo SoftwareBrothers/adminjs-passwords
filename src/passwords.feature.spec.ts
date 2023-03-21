@@ -1,4 +1,4 @@
-import { ActionContext, ActionRequest, ActionResponse, After, Before } from 'adminjs'
+import AdminJS, { ActionContext, ActionRequest, ActionResponse, After, Before } from 'adminjs'
 import { expect } from 'chai'
 import sinon, { SinonStub } from 'sinon'
 
@@ -50,7 +50,7 @@ describe('passwordsFeature', () => {
     let encryptPassword: Before
 
     const getBeforeHook = (options: PasswordsOptions): Before => {
-      const feature = passwordsFeature(options)({})
+      const feature = passwordsFeature(options)(new AdminJS(), {})
       return feature.actions?.edit?.before?.[0] as Before
     }
 
@@ -97,7 +97,7 @@ describe('passwordsFeature', () => {
     let movePasswordErrors: After<ActionResponse>
 
     const getAfterHook = (options: PasswordsOptions): After<ActionResponse> => {
-      const feature = passwordsFeature(options)({})
+      const feature = passwordsFeature(options)(new AdminJS(), {})
       return feature.actions?.edit?.after?.[0] as After<ActionResponse>
     }
 
