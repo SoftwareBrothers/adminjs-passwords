@@ -1,6 +1,7 @@
 import { ActionContext, ActionRequest, ActionResponse, After, Before } from 'adminjs'
 import { expect } from 'chai'
 import sinon, { SinonStub } from 'sinon'
+
 import passwordsFeature, { PasswordsOptions } from './passwords.feature.js'
 
 describe('passwordsFeature', () => {

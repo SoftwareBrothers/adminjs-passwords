@@ -71,5 +71,6 @@
  */
 
 import passwordsFeature from './passwords.feature.js'
+export * from './passwords.feature.js'
 
 export default passwordsFeature

@@ -47,9 +47,9 @@ export type Custom = {
   [T in keyof NonNullable<PasswordsOptions['properties']>]: NonNullable<T>
 }
 
-const editComponent = AdminJS.bundle('../components/edit.js')
+const editComponent = AdminJS.bundle('./components/edit', 'PasswordFeatureEdit' as any)
 
-const passwordsFeature = (options?: PasswordsOptions): FeatureType => {
+export const passwordsFeature = (options?: PasswordsOptions): FeatureType => {
   const passwordProperty = options?.properties?.password || 'password'
   const encryptedPasswordProperty = options?.properties?.encryptedPassword || 'encryptedPassword'
   const { hash } = options || {}
