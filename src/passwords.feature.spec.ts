@@ -43,9 +43,15 @@ describe('passwordsFeature', () => {
     expect(typeof passwordsFeature({ componentLoader, hash })).to.have.eq('function')
   })
 
+  it('throws an error when componentLoader function is not defined', () => {
+    expect(() => {
+      passwordsFeature({} as any)
+    }).to.throw()
+  })
+
   it('throws an error when hashing function is not defined', () => {
     expect(() => {
-      passwordsFeature({ componentLoader, hash })
+      passwordsFeature({ componentLoader } as any)
     }).to.throw()
   })
 
