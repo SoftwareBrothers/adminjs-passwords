@@ -65,7 +65,7 @@ const passwordsFeature = (options: PasswordsOptions): FeatureType => {
     throw new Error('You have to pass "hash" option in "PasswordOptions" of "passwordsFeature"')
   }
 
-  const editComponent = bundleComponent(componentLoader, 'edit')
+  const editComponent = bundleComponent(componentLoader, 'PasswordEditComponent')
 
   const encryptPassword: Before = async (request) => {
     const { method } = request

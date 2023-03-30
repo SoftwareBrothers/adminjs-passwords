@@ -13,6 +13,7 @@
   "license": "MIT",
   "scripts": {
     "release": "semantic-release",
+    "prepare": "husky install",
     "build": "tsc",
     "test": "mocha --loader=ts-node/esm ./src/**/*.spec.ts",
     "lint": "eslint './src/**/*'",
