@@ -1,4 +1,7 @@
-import AdminJS, { ActionResponse, After, Before, buildFeature, FeatureType } from 'adminjs'
+
+import { ActionResponse, After, Before, buildFeature, ComponentLoader, FeatureType } from 'adminjs';
+import bundleComponent from './bundle-component';
+
 
 /**
  * Hashing function used to convert the password
@@ -21,6 +24,10 @@ export type HashingFunction = (
  * @memberof module:@adminjs/passwords
  */
 export type PasswordsOptions = {
+  /**
+   * Your ComponentLoader instance. It is required for the feature to add it's components.
+   */
+  componentLoader: ComponentLoader;
   /**
    * Names of the properties used by the feature
    */
@@ -47,16 +54,18 @@ export type Custom = {
   [T in keyof NonNullable<PasswordsOptions['properties']>]: NonNullable<T>
 }
 
-const editComponent = AdminJS.bundle('./components/edit', 'PasswordFeatureEdit' as any)
 
-export const passwordsFeature = (options?: PasswordsOptions): FeatureType => {
-  const passwordProperty = options?.properties?.password || 'password'
-  const encryptedPasswordProperty = options?.properties?.encryptedPassword || 'encryptedPassword'
-  const { hash } = options || {}
+const passwordsFeature = (options: PasswordsOptions): FeatureType => {
+  const passwordProperty = options.properties?.password || 'password'
+  const encryptedPasswordProperty = options.properties?.encryptedPassword || 'encryptedPassword'
+  const { componentLoader, hash } = options
+
 
   if (!hash) {
     throw new Error('You have to pass "hash" option in "PasswordOptions" of "passwordsFeature"')
   }
+
+  const editComponent = bundleComponent(componentLoader, 'edit')
 
   const encryptPassword: Before = async (request) => {
     const { method } = request
