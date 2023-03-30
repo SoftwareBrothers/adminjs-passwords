@@ -4160,11 +4160,6 @@ eslint-module-utils@^2.7.4:
   dependencies:
     debug "^3.2.7"
 
-eslint-plugin-airbnb@^0.0.1-security:
-  version "0.0.1-security"
-  resolved "https://registry.yarnpkg.com/eslint-plugin-airbnb/-/eslint-plugin-airbnb-0.0.1-security.tgz#c9150fbc5c31ee78f02595edb6079bf591ddb72a"
-  integrity sha512-etPWgqKnv1plcSIt2cHZ/wgH5uQTSzFi4rnvr3YKMWdMzKb8Ca7LHP+F2IODv/J3wuzvkq9mCzwGxEG85KsioQ==
-
 eslint-plugin-import@^2.27.5:
   version "2.27.5"
   resolved "https://registry.yarnpkg.com/eslint-plugin-import/-/eslint-plugin-import-2.27.5.tgz#876a6d03f52608a3e5bb439c2550588e51dd6c65"
