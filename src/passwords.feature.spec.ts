@@ -1,4 +1,3 @@
-
 import AdminJS, { ActionContext, ActionRequest, ActionResponse, After, Before, ComponentLoader } from 'adminjs'
 
 import { expect } from 'chai'

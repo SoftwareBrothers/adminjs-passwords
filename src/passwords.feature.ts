@@ -1,7 +1,5 @@
-
-import { ActionResponse, After, Before, buildFeature, ComponentLoader, FeatureType } from 'adminjs';
-import bundleComponent from './bundle-component';
-
+import { ActionResponse, After, Before, buildFeature, ComponentLoader, FeatureType } from 'adminjs'
+import bundleComponent from './bundle-component.js'
 
 /**
  * Hashing function used to convert the password
@@ -54,12 +52,10 @@ export type Custom = {
   [T in keyof NonNullable<PasswordsOptions['properties']>]: NonNullable<T>
 }
 
-
 const passwordsFeature = (options: PasswordsOptions): FeatureType => {
   const passwordProperty = options.properties?.password || 'password'
   const encryptedPasswordProperty = options.properties?.encryptedPassword || 'encryptedPassword'
   const { componentLoader, hash } = options
-
 
   if (!hash) {
     throw new Error('You have to pass "hash" option in "PasswordOptions" of "passwordsFeature"')
