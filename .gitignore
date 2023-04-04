@@ -161,3 +161,5 @@ build
 .adminjs
 
 example-app/cypress/videos
+
+.nova
