@@ -1,4 +1,5 @@
-import AdminJS, { ActionContext, ActionRequest, ActionResponse, After, Before } from 'adminjs'
+import AdminJS, { ActionContext, ActionRequest, ActionResponse, After, Before, ComponentLoader } from 'adminjs'
+
 import { expect } from 'chai'
 import sinon, { SinonStub } from 'sinon'
 
@@ -10,6 +11,7 @@ describe('passwordsFeature', () => {
   let context: ActionContext
   let response: ActionResponse
   let hash: SinonStub<[string], Promise<string>>
+  const componentLoader = new ComponentLoader()
 
   beforeEach(() => {
     properties = {
@@ -37,12 +39,18 @@ describe('passwordsFeature', () => {
   })
 
   it('returns password feature', async () => {
-    expect(typeof passwordsFeature({ hash })).to.have.eq('function')
+    expect(typeof passwordsFeature({ componentLoader, hash })).to.have.eq('function')
+  })
+
+  it('throws an error when componentLoader function is not defined', () => {
+    expect(() => {
+      passwordsFeature({} as any)
+    }).to.throw()
   })
 
   it('throws an error when hashing function is not defined', () => {
     expect(() => {
-      passwordsFeature()
+      passwordsFeature({ componentLoader } as any)
     }).to.throw()
   })
 
@@ -55,7 +63,7 @@ describe('passwordsFeature', () => {
     }
 
     beforeEach(() => {
-      encryptPassword = getBeforeHook({ properties, hash })
+      encryptPassword = getBeforeHook({ componentLoader, properties, hash })
     })
 
     it('does nothing when method is get', async () => {
@@ -102,7 +110,7 @@ describe('passwordsFeature', () => {
     }
 
     beforeEach(() => {
-      movePasswordErrors = getAfterHook({ properties, hash })
+      movePasswordErrors = getAfterHook({ componentLoader, properties, hash })
     })
 
     it('does nothing when payload doesn\'t have errors', async () => {
