@@ -1,7 +1,9 @@
+import AdminJS, { ActionContext, ActionRequest, ActionResponse, After, Before, ComponentLoader } from 'adminjs'
+
 import { expect } from 'chai'
-import { ActionRequest, Before, ActionContext, After, ActionResponse } from 'adminjs'
 import sinon, { SinonStub } from 'sinon'
-import passwordsFeature, { PasswordsOptions } from './passwords.feature'
+
+import passwordsFeature, { PasswordsOptions } from './passwords.feature.js'
 
 describe('passwordsFeature', () => {
   let properties: NonNullable<PasswordsOptions['properties']>
@@ -9,6 +11,7 @@ describe('passwordsFeature', () => {
   let context: ActionContext
   let response: ActionResponse
   let hash: SinonStub<[string], Promise<string>>
+  const componentLoader = new ComponentLoader()
 
   beforeEach(() => {
     properties = {
@@ -36,12 +39,18 @@ describe('passwordsFeature', () => {
   })
 
   it('returns password feature', async () => {
-    expect(typeof passwordsFeature({ hash })).to.have.eq('function')
+    expect(typeof passwordsFeature({ componentLoader, hash })).to.have.eq('function')
+  })
+
+  it('throws an error when componentLoader function is not defined', () => {
+    expect(() => {
+      passwordsFeature({} as any)
+    }).to.throw()
   })
 
   it('throws an error when hashing function is not defined', () => {
     expect(() => {
-      passwordsFeature()
+      passwordsFeature({ componentLoader } as any)
     }).to.throw()
   })
 
@@ -49,12 +58,12 @@ describe('passwordsFeature', () => {
     let encryptPassword: Before
 
     const getBeforeHook = (options: PasswordsOptions): Before => {
-      const feature = passwordsFeature(options)({})
+      const feature = passwordsFeature(options)(new AdminJS(), {})
       return feature.actions?.edit?.before?.[0] as Before
     }
 
     beforeEach(() => {
-      encryptPassword = getBeforeHook({ properties, hash })
+      encryptPassword = getBeforeHook({ componentLoader, properties, hash })
     })
 
     it('does nothing when method is get', async () => {
@@ -96,12 +105,12 @@ describe('passwordsFeature', () => {
     let movePasswordErrors: After<ActionResponse>
 
     const getAfterHook = (options: PasswordsOptions): After<ActionResponse> => {
-      const feature = passwordsFeature(options)({})
+      const feature = passwordsFeature(options)(new AdminJS(), {})
       return feature.actions?.edit?.after?.[0] as After<ActionResponse>
     }
 
     beforeEach(() => {
-      movePasswordErrors = getAfterHook({ properties, hash })
+      movePasswordErrors = getAfterHook({ componentLoader, properties, hash })
     })
 
     it('does nothing when payload doesn\'t have errors', async () => {

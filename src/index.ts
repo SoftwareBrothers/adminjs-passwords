@@ -70,6 +70,8 @@
  * For the lits of available options take see at {@link PasswordsOptions}.
  */
 
-import passwordsFeature from './passwords.feature'
+import passwordsFeature from './passwords.feature.js'
+
+export * from './passwords.feature.js'
 
 export default passwordsFeature
